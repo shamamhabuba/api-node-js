@@ -1,5 +1,7 @@
 // tests/api.spec.ts
 import { test, expect } from '@playwright/test';
+import { StatusCodes } from 'http-status-codes';
+
 let baseURL: string = 'http://localhost:3000/users';
 
 test.describe('User management API for empty users', () => {
@@ -12,7 +14,7 @@ test.describe('User management API for empty users', () => {
 
 })
 test.describe('User management API for existing users', () => {
-    test.skip('GET /:id - should return a user by ID', async ({ request }) => {
+    test('GET /:id - should return a user by ID', async ({ request }) => {
         const response= await request.get(`${baseURL}`+"/100");
         expect(response.status()).toBe(200);
         const responseBody = await response.json()
@@ -20,7 +22,7 @@ test.describe('User management API for existing users', () => {
 
     });
 
-    test.skip('GET /:id - should return 404 if user not found', async ({ request }) => {
+    test('GET /:id - should return 404 if user not found', async ({ request }) => {
         const response= await request.get(`${baseURL}`+"/101");
         expect(response.status()).toBe(404);
     });
